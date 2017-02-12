@@ -17,8 +17,12 @@ function draw() {
 
     player.update();
 
-    for (i = 0; i < 10; i++)
+    for (i = blobs.length - 1; i >= 0; i--) {
         blobs[i].show();
+        if (player.collided(blobs[i])) {
+            blobs.splice(i, 1);
+        }
+    }
 
     player.show();
 }

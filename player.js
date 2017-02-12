@@ -10,6 +10,10 @@ function Player() {
         this.pos.add(this.vel);
     }
 
+    this.collided = function(p) {
+        return p5.Vector.dist(this.pos, p.pos) < this.radius + p.radius;
+    }
+
     this.show = function() {
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
     }
