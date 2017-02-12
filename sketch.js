@@ -2,6 +2,8 @@ var player;
 
 var blobs = [];
 
+var points = 0;
+
 function setup() {
     createCanvas(800, 480);
 
@@ -15,17 +17,25 @@ function setup() {
 
 function draw() {
     background(0);
-    translate(width / 2 - player.pos.x, height / 2 - player.pos.y);
-
+    
     player.update();
+    push();
+    translate(width / 2 - player.pos.x, height / 2 - player.pos.y);
 
     for (i = blobs.length - 1; i >= 0; i--) {
         blobs[i].show();
         if (player.collided(blobs[i])) {
             player.radius += 1;
+            points += blobs[i].radius;
+
             blobs.splice(i, 1);
         }
     }
 
     player.show();
+    pop();
+
+    fill(255);
+    textSize(24);
+    text('Points: ' + floor(points), 10, 35);
 }
