@@ -9,6 +9,8 @@ function setup() {
 
     for (i = 0; i < 100; i++)
         blobs.push(new Blob(random(width), random(height), random(5, 10)));
+
+    colorMode(HSB);
 }
 
 function draw() {

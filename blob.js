@@ -2,6 +2,7 @@ function Blob(x, y, r) {
     this.pos = createVector(x, y);
     this.vel = createVector(0, 0);
     this.radius = r;
+    this.color = random(255);
 
     this.show = function() {
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
@@ -19,6 +20,7 @@ function Blob(x, y, r) {
     }
 
     this.show = function() {
+        fill(this.color, 255, 255);
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
     }
 }
