@@ -1,3 +1,4 @@
+var mapSize = 2;
 var player;
 
 var blobs = [];
@@ -11,7 +12,7 @@ function setup() {
     player = new Blob(0, 0, 60);
 
     for (i = 0; i < 100; i++)
-        blobs.push(new Blob(random(-width,width), random(-height,height), random(5, 10)));
+        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, 10)));
 
     colorMode(HSB);
 }
@@ -20,7 +21,7 @@ function draw() {
     background(10);
     
     if (random() > 0.97) {
-        blobs.push(new Blob(random(-width,width), random(-height,height), random(5, 10)));
+        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, 10)));
     }
 
     player.update();
@@ -47,7 +48,7 @@ function draw() {
     noFill();
     strokeWeight(10);
     stroke(50);
-    rect(-width, -height, width * 2, height * 2);
+    rect(-width * mapSize, -height * mapSize, width * 2 * mapSize, height * 2 * mapSize);
 
     noStroke();
     player.show();
