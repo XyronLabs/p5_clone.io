@@ -1,4 +1,6 @@
 var mapSize = 2;
+var minZoom = 0.15;
+
 var player;
 
 var blobs = [];
@@ -12,7 +14,7 @@ function setup() {
     player = new Blob(0, 0, 60);
 
     for (i = 0; i < 100; i++)
-        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, 10)));
+        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, 100)));
 
     colorMode(HSB);
 }
@@ -28,7 +30,9 @@ function draw() {
     push();
 
     translate(width / 2, height / 2);
-    zoom = lerp(zoom, 60 / player.radius, 0.1)
+    if (zoom > minZoom) {
+        zoom = lerp(zoom, 60 / player.radius, 0.1);
+    }
     scale(zoom);
     
     translate(- player.pos.x, - player.pos.y);
@@ -37,7 +41,8 @@ function draw() {
     for (i = blobs.length - 1; i >= 0; i--) {
         blobs[i].show();
         if (player.collided(blobs[i])) {
-            player.radius += 1;
+            var newArea = (PI * player.radius * player.radius) + (PI * blobs[i].radius * blobs[i].radius);
+            player.radius = sqrt(newArea / PI);
             points += blobs[i].radius;
 
             blobs.splice(i, 1);
