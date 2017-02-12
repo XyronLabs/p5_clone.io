@@ -5,10 +5,10 @@ var blobs = [];
 function setup() {
     createCanvas(800, 480);
 
-    player = new Player();
+    player = new Blob(0, 0, 20);
 
     for (i = 0; i < 100; i++)
-        blobs.push(new Blob());
+        blobs.push(new Blob(random(width), random(height), random(5, 10)));
 }
 
 function draw() {
