@@ -18,6 +18,10 @@ function setup() {
 function draw() {
     background(10);
     
+    if (random() > 0.97) {
+        blobs.push(new Blob(random(-width,width), random(-height,height), random(5, 10)));
+    }
+
     player.update();
     push();
     translate(width / 2 - player.pos.x, height / 2 - player.pos.y);
