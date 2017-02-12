@@ -7,7 +7,7 @@ function setup() {
 
     player = new Player();
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < 100; i++)
         blobs.push(new Blob());
 }
 
@@ -20,6 +20,7 @@ function draw() {
     for (i = blobs.length - 1; i >= 0; i--) {
         blobs[i].show();
         if (player.collided(blobs[i])) {
+            player.radius += 1;
             blobs.splice(i, 1);
         }
     }
