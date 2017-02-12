@@ -10,18 +10,19 @@ function setup() {
     player = new Blob(0, 0, 20);
 
     for (i = 0; i < 100; i++)
-        blobs.push(new Blob(random(width), random(height), random(5, 10)));
+        blobs.push(new Blob(random(-width,width), random(-height,height), random(5, 10)));
 
     colorMode(HSB);
 }
 
 function draw() {
-    background(0);
+    background(10);
     
     player.update();
     push();
     translate(width / 2 - player.pos.x, height / 2 - player.pos.y);
 
+    noStroke();
     for (i = blobs.length - 1; i >= 0; i--) {
         blobs[i].show();
         if (player.collided(blobs[i])) {
@@ -32,6 +33,13 @@ function draw() {
         }
     }
 
+    // Draw border
+    noFill();
+    strokeWeight(10);
+    stroke(50);
+    rect(-width, -height, width * 2, height * 2);
+
+    noStroke();
     player.show();
     pop();
 
