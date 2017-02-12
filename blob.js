@@ -9,10 +9,15 @@ function Blob(x, y, r) {
     }
 
     this.update = function() {
-        var acc = createVector(mouseX - width / 2, mouseY - height / 2);
-        acc.setMag(3);
-        this.vel.lerp(acc, 0.2);
-        this.pos.add(this.vel);
+            var acc = createVector(mouseX - width / 2, mouseY - height / 2);
+            acc.setMag(3);
+            this.vel.lerp(acc, 0.2);
+        if (this.pos.x + this.vel.x > 0 && this.pos.x + this.vel.x < width) {
+            this.pos.x += this.vel.x;
+        }
+        if (this.pos.y + this.vel.y > 0 && this.pos.y + this.vel.y < height) {
+            this.pos.y += this.vel.y;
+        }
     }
 
     this.collided = function(p) {
