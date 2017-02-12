@@ -22,24 +22,31 @@ function setup() {
 function draw() {
     background(10);
     
+    // Create new blobs randomly
     if (random() > 0.97) {
         blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, 10)));
     }
 
     player.update();
-    push();
 
+    // Render the map
+    push();
     translate(width / 2, height / 2);
+
+    // Zoom out the map
     if (zoom > minZoom) {
         zoom = lerp(zoom, 60 / player.radius, 0.1);
     }
     scale(zoom);
     
-    translate(- player.pos.x, - player.pos.y);
+    translate(-player.pos.x, -player.pos.y);
 
+    // Draw blobs
     noStroke();
     for (i = blobs.length - 1; i >= 0; i--) {
         blobs[i].show();
+
+        // Check if blob has been eaten
         if (player.collided(blobs[i])) {
             var newArea = (PI * player.radius * player.radius) + (PI * blobs[i].radius * blobs[i].radius);
             player.radius = sqrt(newArea / PI);
@@ -55,10 +62,12 @@ function draw() {
     stroke(50);
     rect(-width * mapSize, -height * mapSize, width * 2 * mapSize, height * 2 * mapSize);
 
+    // Draw player
     noStroke();
     player.show();
     pop();
 
+    // Show points!
     fill(255);
     textSize(24);
     text('Points: ' + floor(points), 10, 35);

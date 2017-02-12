@@ -8,6 +8,7 @@ function Blob(x, y, r) {
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
     }
 
+    // Only used in player
     this.update = function() {
             var acc = createVector(mouseX - width / 2, mouseY - height / 2);
             acc.setMag(3);
