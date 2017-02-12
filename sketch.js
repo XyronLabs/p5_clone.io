@@ -3,11 +3,12 @@ var player;
 var blobs = [];
 
 var points = 0;
+var zoom = 1;
 
 function setup() {
     createCanvas(800, 480);
 
-    player = new Blob(0, 0, 20);
+    player = new Blob(0, 0, 60);
 
     for (i = 0; i < 100; i++)
         blobs.push(new Blob(random(-width,width), random(-height,height), random(5, 10)));
@@ -24,7 +25,12 @@ function draw() {
 
     player.update();
     push();
-    translate(width / 2 - player.pos.x, height / 2 - player.pos.y);
+
+    translate(width / 2, height / 2);
+    zoom = lerp(zoom, 60 / player.radius, 0.1)
+    scale(zoom);
+    
+    translate(- player.pos.x, - player.pos.y);
 
     noStroke();
     for (i = blobs.length - 1; i >= 0; i--) {
