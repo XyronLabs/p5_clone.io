@@ -7,6 +7,7 @@ var blobs = [];
 
 var points = 0;
 var zoom = 1;
+var dead = false;
 
 function setup() {
     createCanvas(800, 480);
@@ -66,10 +67,7 @@ function draw() {
 
                 blobs.splice(i, 1);
             } else {
-                fill(255);
-                textSize(100);
-                text("Game over!", -width/2, 0);
-                noLoop();
+                dead = true;
             }
         }
     }
@@ -89,4 +87,11 @@ function draw() {
     fill(255);
     textSize(24);
     text('Points: ' + floor(points), 10, 35);
+
+    if (dead) {
+        fill(255);
+        textSize(100);
+        text("Game over!", width/6, height/2);
+        noLoop();
+    }
 }
