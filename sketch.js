@@ -28,7 +28,7 @@ function draw() {
     }
 
     player.update();
-
+    
     // Render the map
     push();
     translate(width / 2, height / 2);
@@ -43,8 +43,19 @@ function draw() {
 
     // Draw blobs
     noStroke();
-    for (i = blobs.length - 1; i >= 0; i--) {
+    for (var i = blobs.length - 1; i >= 0; i--) {
+        blobs[i].moveRandom();
         blobs[i].show();
+        
+        // Blobs can eat other blobs
+        for (var j = blobs.length - 1; j >= 0; j--) {
+            if (blobs[i] !== blobs[j] && blobs[j].collided(blobs[i])) {
+                var newArea = (PI * blobs[j].radius * blobs[j].radius) + (PI * blobs[i].radius * blobs[i].radius);
+                blobs[i].radius = sqrt(newArea / PI);
+
+                blobs.splice(j, 1);
+            }
+        }
 
         // Check if blob has been eaten
         if (player.collided(blobs[i])) {

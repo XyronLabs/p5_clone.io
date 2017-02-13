@@ -10,9 +10,17 @@ function Blob(x, y, r) {
 
     // Only used in player
     this.update = function() {
-            var acc = createVector(mouseX - width / 2, mouseY - height / 2);
-            acc.setMag(3);
-            this.vel.lerp(acc, 0.2);
+         this.move(mouseX, mouseY);
+    }
+
+    this.moveRandom = function() {
+        this.move(random(0, width), random(0, height));
+    }
+
+    this.move = function(x, y) {
+        var acc = createVector(x - width / 2, y - height / 2);
+        acc.setMag(3);
+        this.vel.lerp(acc, 0.2);
         if (this.pos.x + this.vel.x > -width * mapSize && this.pos.x + this.vel.x < width * mapSize) {
             this.pos.x += this.vel.x;
         }
@@ -22,7 +30,7 @@ function Blob(x, y, r) {
     }
 
     this.collided = function(p) {
-        return p5.Vector.dist(this.pos, p.pos) < this.radius + p.radius;
+        return p != null && p5.Vector.dist(this.pos, p.pos) < this.radius + p.radius;
     }
 
     this.show = function() {
