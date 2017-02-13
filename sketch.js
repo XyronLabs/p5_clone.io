@@ -1,4 +1,4 @@
-var mapSize = 2;
+var mapSize = 4;
 var minZoom = 0.15;
 
 var player;
@@ -14,7 +14,7 @@ function setup() {
     player = new Blob(0, 0, 60);
 
     for (i = 0; i < 100; i++)
-        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, player.radius * 1.2)));
+        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, player.radius * 0.8)));
 
     colorMode(HSB);
 }
@@ -24,7 +24,7 @@ function draw() {
     
     // Create new blobs randomly
     if (random() > 0.97) {
-        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, player.radius * 1.2)));
+        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, frameCount / (player.radius * 0.075) )));
     }
 
     player.update();
