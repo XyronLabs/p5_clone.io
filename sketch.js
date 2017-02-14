@@ -1,6 +1,7 @@
 var mapSize = 4;
 var minZoom = 0.12;
 var gridSize = 50;
+var difficulty = 0.35;
 
 var player;
 
@@ -8,6 +9,9 @@ var blobs = [];
 
 var points = 0;
 var zoom = 1;
+var level = 1;
+var massCounter = 0;
+var massPerLevel = 200;
 var dead = false;
 
 function setup() {
@@ -28,11 +32,17 @@ function draw() {
     if (random() > 0.97) {
         var x = random(-width * mapSize, width * mapSize);
         var y = random(-height * mapSize, height * mapSize);
-        var r = random(5, frameCount / (player.radius * 0.075));
+        var r = random(5, player.radius * level * difficulty);
         blobs.push(new Blob(x, y, r));
     }
 
     player.update();
+
+    if (massCounter > massPerLevel) {
+        level++;
+        massCounter = 0;
+        massPerLevel += 50;
+    }
 
     // Render the map
     push();
@@ -78,6 +88,7 @@ function draw() {
                 var newArea = (PI * player.radius * player.radius) + (PI * blobs[i].radius * blobs[i].radius);
                 player.radius = sqrt(newArea / PI);
                 points += blobs[i].radius;
+                massCounter += blobs[i].radius;
 
                 blobs.splice(i, 1);
             } else {
@@ -97,10 +108,16 @@ function draw() {
     player.show();
     pop();
 
-    // Show points!
+    // Show points
     fill(255);
-    textSize(24);
-    text('Points: ' + floor(points), 10, 35);
+    textSize(20);
+    text('Points: ' + floor(points), 10, 30);
+
+    // Show level
+    text('Level: ' + level, 10, 60);
+
+    // Show mass until next level
+    text('Remaining mass: ' + floor(massPerLevel - massCounter), 10, 90);
 
     // Finish the game if player is dead
     if (dead) {
