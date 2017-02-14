@@ -34,9 +34,15 @@ function Blob(x, y, r) {
     this.show = function() {
         fill(this.color, 255, 255);
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
+
         noFill();
         stroke(this.color, 255, 90);
         strokeWeight(this.radius / 15);
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
+        
+        fill(this.color, 255, 40);
+        textSize(this.radius * 0.5);
+        textAlign(CENTER, CENTER);
+        text(floor(this.radius), this.pos.x, this.pos.y);
     }
 }
