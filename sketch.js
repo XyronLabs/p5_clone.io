@@ -40,8 +40,9 @@ function draw() {
 
     if (massCounter > massPerLevel) {
         level++;
-        massCounter = 0;
+        massCounter %= massPerLevel;
         massPerLevel += 50;
+        difficulty *= 0.9;
     }
 
     // Render the map
