@@ -1,6 +1,7 @@
 function Blob(x, y, r) {
     this.pos = createVector(x, y);
     this.vel = createVector(0, 0);
+    this.dir = createVector(random(0, width), random(0, height));
     this.radius = r;
     this.color = random(255);
 
@@ -14,7 +15,9 @@ function Blob(x, y, r) {
     }
 
     this.moveRandom = function() {
-        this.move(random(0, width), random(0, height));
+        if (random() > 0.97)
+            this.dir = createVector(random(0, width), random(0, height));
+        this.move(this.dir.x, this.dir.y);
     }
 
     this.move = function(x, y) {
