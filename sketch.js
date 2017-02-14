@@ -1,5 +1,6 @@
 var mapSize = 4;
 var minZoom = 0.12;
+var gridSize = 50;
 
 var player;
 
@@ -21,7 +22,7 @@ function setup() {
 }
 
 function draw() {
-    background(10);
+    background(20);
 
     // Create new blobs randomly
     if (random() > 0.97) {
@@ -43,6 +44,17 @@ function draw() {
     scale(zoom);
 
     translate(-player.pos.x, -player.pos.y);
+
+    // Draw map grid
+    noFill()
+    stroke(10);
+    strokeWeight(1);
+    for (var x = -width * mapSize; x < width * mapSize; x += gridSize)
+        line(x, -height * mapSize, x, height * mapSize);
+    
+    for (var y = -height * mapSize; y < height * mapSize; y += gridSize) 
+        line(-width * mapSize, y, width * mapSize, y);
+    
 
     // Draw blobs
     noStroke();
