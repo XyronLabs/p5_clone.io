@@ -1,5 +1,5 @@
 var mapSize = 4;
-var minZoom = 0.15;
+var minZoom = 0.12;
 
 var player;
 
@@ -17,29 +17,31 @@ function setup() {
     for (i = 0; i < 100; i++)
         blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, player.radius * 0.8)));
 
-    colorMode(HSB);
+    colorMode(HSB, 255, 255);
 }
 
 function draw() {
     background(10);
-    
+
     // Create new blobs randomly
     if (random() > 0.97) {
-        blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, frameCount / (player.radius * 0.075) )));
+        var x = random(-width * mapSize, width * mapSize);
+        var y = random(-height * mapSize, height * mapSize);
+        var r = random(5, frameCount / (player.radius * 0.075));
+        blobs.push(new Blob(x, y, r));
     }
 
     player.update();
-    
+
     // Render the map
     push();
     translate(width / 2, height / 2);
 
     // Zoom out the map
-    if (zoom > minZoom) {
+    if (zoom > minZoom)
         zoom = lerp(zoom, 60 / player.radius, 0.1);
-    }
     scale(zoom);
-    
+
     translate(-player.pos.x, -player.pos.y);
 
     // Draw blobs
@@ -47,7 +49,7 @@ function draw() {
     for (var i = blobs.length - 1; i >= 0; i--) {
         blobs[i].moveRandom();
         blobs[i].show();
-        
+
         // Blobs can eat other blobs
         for (var j = blobs.length - 1; j >= 0; j--) {
             if (blobs[i] !== blobs[j] && blobs[j].collided(blobs[i])) {
@@ -88,6 +90,7 @@ function draw() {
     textSize(24);
     text('Points: ' + floor(points), 10, 35);
 
+    // Finish the game if player is dead
     if (dead) {
         fill(255);
         textSize(100);

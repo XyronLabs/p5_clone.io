@@ -10,7 +10,7 @@ function Blob(x, y, r) {
 
     // Only used in player
     this.update = function() {
-         this.move(mouseX, mouseY);
+        this.move(mouseX, mouseY);
     }
 
     this.moveRandom = function() {
@@ -21,12 +21,10 @@ function Blob(x, y, r) {
         var acc = createVector(x - width / 2, y - height / 2);
         acc.setMag(3);
         this.vel.lerp(acc, 0.2);
-        if (this.pos.x + this.vel.x > -width * mapSize && this.pos.x + this.vel.x < width * mapSize) {
+        if (this.pos.x + this.vel.x > -width * mapSize && this.pos.x + this.vel.x < width * mapSize)
             this.pos.x += this.vel.x;
-        }
-        if (this.pos.y + this.vel.y > -height * mapSize && this.pos.y + this.vel.y < height * mapSize) {
+        if (this.pos.y + this.vel.y > -height * mapSize && this.pos.y + this.vel.y < height * mapSize)
             this.pos.y += this.vel.y;
-        }
     }
 
     this.collided = function(p) {
@@ -37,7 +35,7 @@ function Blob(x, y, r) {
         fill(this.color, 255, 255);
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
         noFill();
-        stroke(this.color, 255, 80);
+        stroke(this.color, 255, 90);
         strokeWeight(this.radius / 15);
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
     }
