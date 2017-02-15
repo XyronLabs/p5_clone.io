@@ -30,9 +30,11 @@ function draw() {
 
     // Create new blobs randomly
     if (random() > 0.97) {
-        var x = random(-width * mapSize, width * mapSize);
-        var y = random(-height * mapSize, height * mapSize);
         var r = random(5, player.radius * level * difficulty);
+        do {
+            var x = random(-width * mapSize, width * mapSize);
+            var y = random(-height * mapSize, height * mapSize);
+        } while (dist(x, y, player.pos.x, player.pos.y) < r + player.radius);
         blobs.push(new Blob(x, y, r));
     }
 
