@@ -2,6 +2,9 @@ var mapSize = 4;
 var minZoom = 0.12;
 var gridSize = 50;
 var difficulty = 0.35;
+var recordUrl = "https://spreadsheets.google.com/feeds/list/1V91e8YMYGk7ANUY_POx89IT4PyldPFa1aQpyU4f0KTg/od6/public/values?alt=json";
+
+var record = -1;
 
 var player;
 
@@ -13,6 +16,10 @@ var level = 1;
 var massCounter = 0;
 var massPerLevel = 200;
 var dead = false;
+
+function preload() {
+    loadJSON(recordUrl, (r) => { record = r.feed.entry[0].gsx$record.$t });
+}
 
 function setup() {
     createCanvas(800, 480);
@@ -121,6 +128,9 @@ function draw() {
 
     // Show mass until next level
     text('Remaining mass: ' + floor(massPerLevel - massCounter), 10, 90);
+
+    // Show record (WIP)
+    text('Record: ' + record, 10, height - 10);
 
     // Finish the game if player is dead
     if (dead) {
