@@ -31,7 +31,8 @@ function draw() {
 
 function mousePressed() {
     if (mouseX > width / 3 && mouseX < width * 2 / 3
-     && mouseY > height / 3 && mouseY < height * 2 / 3) {
+     && mouseY > height / 3 && mouseY < height * 2 / 3
+     && dead) {
         dead = false;
         startGame();
     }
