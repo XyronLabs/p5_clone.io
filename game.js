@@ -1,10 +1,16 @@
 function startGame() {
+    blobs = [];
+    points = 0;
+    zoom = 1;
+    level = 1;
+    massCounter = 0;
+    massPerLevel = 200;
+
     player = new Blob(0, 0, 60);
 
     for (i = 0; i < 100; i++)
         blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, player.radius * 0.8)));
 
-    colorMode(HSB, 255, 255);
 }
 
 function gameLoop() {
@@ -104,14 +110,16 @@ function gameLoop() {
     // Show mass until next level
     text('Remaining mass: ' + floor(massPerLevel - massCounter), 10, 90);
 
-    // Show record (WIP)
-    //text('Record: ' + record, 10, height - 10);
+    // Show record
+    text('Record: ' + record, 10, height - 10);
 
     // Finish the game if player is dead
     if (dead) {
         fill(255);
         textSize(100);
-        text("Game over!", width/6, height/2);
-        noLoop();
+        text("Game over!", width/3.5, 100);
+        
+        if (record < points)
+            record = floor(points);
     }
 }
