@@ -8,11 +8,6 @@ class Blob {
     }
 }
 
-// Only used in player
-Blob.prototype.update = function() {
-    this.move(mouseX, mouseY);
-}
-
 Blob.prototype.moveRandom = function() {
     if (random() > 0.97)
         this.dir = createVector(random(0, width), random(0, height));
