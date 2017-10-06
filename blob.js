@@ -1,9 +1,11 @@
-function Blob(x, y, r) {
-    this.pos = createVector(x, y);
-    this.vel = createVector(0, 0);
-    this.dir = createVector(random(0, width), random(0, height));
-    this.radius = r;
-    this.color = random(255);
+class Blob {
+    constructor(x, y, r){
+        this.pos = createVector(x, y);
+        this.vel = createVector(0, 0);
+        this.dir = createVector(random(0, width), random(0, height));
+        this.radius = r;
+        this.color = random(255);
+    }
 }
 
 // Only used in player
