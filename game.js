@@ -6,7 +6,7 @@ function startGame() {
     massCounter = 0;
     massPerLevel = 200;
 
-    player = new Blob(0, 0, 60);
+    player = new Player(0, 0, 60);
 
     for (i = 0; i < 100; i++)
         blobs.push(new Blob(random(-width * mapSize, width * mapSize), random(-height * mapSize, height * mapSize), random(5, player.radius * 0.8)));
