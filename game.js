@@ -18,7 +18,7 @@ function gameLoop() {
 
     // Create new blobs randomly
     if (random() > 0.97) {
-        var r = random(5, player.radius * level * difficulty);
+        let r = random(5, player.radius * level * difficulty);
         do {
             var x = random(-width * mapSize, width * mapSize);
             var y = random(-height * mapSize, height * mapSize);
@@ -50,23 +50,23 @@ function gameLoop() {
     noFill()
     stroke(10);
     strokeWeight(1);
-    for (var x = -width * mapSize; x < width * mapSize; x += gridSize)
+    for (let x = -width * mapSize; x < width * mapSize; x += gridSize)
         line(x, -height * mapSize, x, height * mapSize);
     
-    for (var y = -height * mapSize; y < height * mapSize; y += gridSize) 
+    for (let y = -height * mapSize; y < height * mapSize; y += gridSize) 
         line(-width * mapSize, y, width * mapSize, y);
     
 
     // Draw blobs
     noStroke();
-    for (var i = blobs.length - 1; i >= 0; i--) {
+    for (let i = blobs.length - 1; i >= 0; i--) {
         blobs[i].moveRandom();
         blobs[i].show();
 
         // Blobs can eat other blobs
-        for (var j = blobs.length - 1; j >= 0; j--) {
+        for (let j = blobs.length - 1; j >= 0; j--) {
             if (blobs[i] !== blobs[j] && blobs[j].collided(blobs[i])) {
-                var newArea = (PI * blobs[j].radius * blobs[j].radius) + (PI * blobs[i].radius * blobs[i].radius);
+                let newArea = (PI * blobs[j].radius * blobs[j].radius) + (PI * blobs[i].radius * blobs[i].radius);
                 blobs[i].radius = sqrt(newArea / PI);
 
                 blobs.splice(j, 1);
@@ -76,7 +76,7 @@ function gameLoop() {
         // Check if blob has been eaten
         if (player.collided(blobs[i])) {
             if (player.radius > blobs[i].radius) {
-                var newArea = (PI * player.radius * player.radius) + (PI * blobs[i].radius * blobs[i].radius);
+                let newArea = (PI * player.radius * player.radius) + (PI * blobs[i].radius * blobs[i].radius);
                 player.radius = sqrt(newArea / PI);
                 points += blobs[i].radius;
                 massCounter += blobs[i].radius;

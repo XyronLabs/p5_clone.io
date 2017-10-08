@@ -1,13 +1,13 @@
-var record = 0;
-var dead = true;
+let record = 0;
+let dead = true;
 
-var player;
-var blobs;
-var points;
-var zoom;
-var level;
-var massCounter;
-var massPerLevel;
+let player;
+let blobs;
+let points;
+let zoom;
+let level;
+let massCounter;
+let massPerLevel;
 
 // function preload() {
 //     loadJSON(recordUrl, (r) => { record = r.feed.entry[0].gsx$record.$t });

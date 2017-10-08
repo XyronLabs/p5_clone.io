@@ -14,7 +14,7 @@ class Blob {
     }
 
     move(x, y) {
-        var acc = createVector(x - width / 2, y - height / 2);
+        let acc = createVector(x - width / 2, y - height / 2);
         acc.setMag(3);
         this.vel.lerp(acc, 0.2);
         if (this.pos.x + this.vel.x > -width * mapSize && this.pos.x + this.vel.x < width * mapSize)
