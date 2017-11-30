@@ -14,7 +14,7 @@ let massPerLevel;
 // }
 
 function setup() {
-    createCanvas(800, 480);
+    createCanvas(windowWidth, windowHeight);
     colorMode(HSB, 255, 255);
     background(20);
 
